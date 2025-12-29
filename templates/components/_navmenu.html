@@ -1,0 +1,18 @@
+{% set left_menu = [ {'label': 'About', 'href': '/about'}, {'label': 'Articles',
+'href': '/articles'}, {'label': 'Projects', 'href': '/project'}, {'label': 'Get
+in touch', 'href': '/contact'} ] %} {% for item in left_menu %} {% set is_active
+= request.path == item.href %}
+
+<a
+  href="{{ item.href }}"
+  class="group relative text-sm transition-colors duration-200
+                   {{ 'font-semibold text-zinc-900 dark:text-zinc-100' if is_active else 'font-medium text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200' }}"
+>
+  {{ item.label }}
+
+  <span
+    class="absolute -bottom-1 left-0 h-0.5 rounded-full bg-indigo-500 dark:bg-indigo-400 transition-all duration-300 ease-out
+                     {{ 'w-full' if is_active else 'w-0 group-hover:w-full' }}"
+  ></span>
+</a>
+{% endfor %}
