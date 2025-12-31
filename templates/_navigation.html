@@ -1,18 +1,16 @@
 <nav
-  class="sticky top-0 z-50 w-full rounded-sm border border-zinc-200/50 bg-white/55 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 md:rounded-full dark:border-zinc-700/50 dark:bg-zinc-950/50"
+  class="sticky top-0 right-0 left-0 z-50 w-full rounded-sm border border-zinc-200/50 bg-white/55 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 md:rounded-full dark:border-zinc-700/50 dark:bg-zinc-950/50"
 >
   <div class="mx-auto w-full max-w-4xl px-4 md:px-6">
     <div class="flex h-14 items-center justify-between lg:h-16">
       <div class="flex-shrink-0">
         <a href="/" class="group flex items-center gap-2">
-          <!-- Profile Picture menggunakan div + bg-image -->
           <div
             class="h-8 w-8 rounded-full bg-cover bg-no-repeat shadow-sm ring-1 ring-zinc-900/10"
             style="background-image: url('{{ url_for('static', filename='img/profile.png') }}');"
             role="img"
             aria-label="Profile Photo"
           ></div>
-
           <div class="text-base font-bold text-zinc-950 dark:text-white">
             baseleus.
           </div>
@@ -39,8 +37,16 @@
             id="mobile-menu-btn"
             class="p-2 text-zinc-600 hover:text-zinc-900 focus:outline-none dark:text-zinc-400 dark:hover:text-white"
           >
-            <i data-lucide="menu" id="icon-menu" class="block h-6 w-6"></i>
-            <i data-lucide="x" id="icon-close" class="hidden h-6 w-6"></i>
+            <i
+              data-lucide="menu"
+              id="icon-menu"
+              class="block h-6 w-6 transition-transform duration-300"
+            ></i>
+            <i
+              data-lucide="x"
+              id="icon-close"
+              class="hidden h-6 w-6 transition-transform duration-300"
+            ></i>
           </button>
         </div>
       </div>
@@ -49,23 +55,22 @@
 
   <div
     id="mobile-menu"
-    class="absolute inset-x-0 top-full max-h-0 overflow-hidden rounded-sm bg-white opacity-0 shadow-xl transition-all duration-500 ease-in-out md:hidden dark:bg-zinc-900"
+    class="absolute inset-x-0 top-full max-h-0 overflow-hidden rounded-b-2xl border-t border-zinc-100 bg-white/95 opacity-0 shadow-xl backdrop-blur-xl transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden dark:border-zinc-800 dark:bg-zinc-900/95"
   >
-    <div class="border-t border-zinc-100 dark:border-zinc-800">
-      <div class="px-4 pt-4 pb-8">
-        <div class="flex flex-col space-y-2">
-          {% for item in left_menu %} {% set is_active = request.path ==
-          item.href %}
+    <div class="px-4 pt-4 pb-8">
+      <div class="flex flex-col space-y-2">
+        {% for item in left_menu %} {% set is_active = request.path == item.href
+        %}
 
-          <a
-            href="{{ item.href }}"
-            class="block rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 transform translate-y-4 opacity-0 mobile-link-item
-                              {{ 'bg-zinc-100 font-bold text-zinc-900 dark:bg-zinc-800 dark:text-white' if is_active else 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white' }}"
-          >
-            {{ item.label }}
-          </a>
-          {% endfor %}
-        </div>
+        <a
+          href="{{ item.href }}"
+          class="mobile-link-item block rounded-lg px-4 py-3 text-sm font-medium transition-all duration-500 transform translate-y-4 opacity-0
+                 {{ 'bg-zinc-100 font-bold text-zinc-900 dark:bg-zinc-800 dark:text-white' if is_active else 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white' }}"
+          style="transition-delay: {{ loop.index0 * 100 }}ms"
+        >
+          {{ item.label }}
+        </a>
+        {% endfor %}
       </div>
     </div>
   </div>
